@@ -16,6 +16,7 @@ import {
   ViewStyle
 } from 'react-native';
 import ImageZoom from 'react-native-image-pan-zoom';
+import FastImage from 'react-native-fast-image';
 import styles from './image-viewer.style';
 import { IImageInfo, IImageSize, Props, State } from './image-viewer.type';
 
@@ -182,7 +183,8 @@ export default class ImageViewer extends React.Component<Props, State> {
     // 如果已知源图片宽高，直接设置为 success
     if (image.width && image.height){
       if(this.props.enablePreload && imageLoaded===false){
-        Image.prefetch(image.url)
+        // Image.prefetch(image.url)
+        FastImage.preload([{uri: image.url}]);
       }
       imageStatus.width = image.width;
       imageStatus.height = image.height;
